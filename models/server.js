@@ -6,7 +6,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
-        this.path = { admin: '/api/admin' };
+        this.path = { admin: '/api/admin', auth: '/api/auth' };
         //DB
         this.dbConnection();
         // Middlewares
@@ -37,6 +37,7 @@ class Server {
 
     routes() {
         this.app.use(this.path.admin, require('../routes/administrador'));
+        this.app.use(this.path.auth, require('../routes/auth'));
     }
 
     listen() {

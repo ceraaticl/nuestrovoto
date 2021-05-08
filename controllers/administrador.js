@@ -1,11 +1,16 @@
 const { response, request } = require('express');
 const Administrador = require('../models/administrador');
+const bcrypt = require('bcryptjs');
 
 const adminPost = async (req = request, res = response) => {
     try {
+        const { contrasena } = req.body;
+        const salt = bcrypt.genSaltSync();
+        req.body.contrasena = bcrypt.hashSync(contrasena, salt);
         const admin = await Administrador.create(req.body);
         res.status(201).json({ msg: 'Admin creado', admin });
     } catch (error) {
+        console.log(error);
         res.status(500).json('Ups');
     }
 };

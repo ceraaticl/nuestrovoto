@@ -7,4 +7,11 @@ const existRut = async (rut = '') => {
     }
 };
 
-module.exports = { existRut };
+const notExistRut = async (rut = '') => {
+    const existe = await Administrador.findByPk(rut);
+    if (!existe) {
+        throw new Error(`El rut ${rut} no existe en la base de datos.`);
+    }
+};
+
+module.exports = { existRut, notExistRut };
