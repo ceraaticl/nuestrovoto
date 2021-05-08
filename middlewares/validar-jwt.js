@@ -22,12 +22,6 @@ const validarJWT = async (req = request, res = response, next) => {
             });
         }
 
-        if (!(String(id) === String(req.body.rut))) {
-            return res.status(401).json({
-                msg: 'Token no es de tu propiedad',
-            });
-        }
-
         next();
     } catch (error) {
         console.log(error);
