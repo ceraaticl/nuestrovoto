@@ -1,17 +1,17 @@
 const Administrador = require('../models/administrador');
 
-const existRut = async (rut = '') => {
-    const existe = await Administrador.findByPk(rut);
-    if (existe) {
-        throw new Error(`El rut ${rut} ya existe en la base de datos.`);
-    }
-};
-
-const notExistRut = async (rut = '') => {
+const existsRut = async (rut = '') => {
     const existe = await Administrador.findByPk(rut);
     if (!existe) {
-        throw new Error(`El rut ${rut} no existe en la base de datos.`);
+        throw new Error(`The rut ${rut} does not exist in the database.`);
     }
 };
 
-module.exports = { existRut, notExistRut };
+const notExistsRut = async (rut = '') => {
+    const existe = await Administrador.findByPk(rut);
+    if (existe) {
+        throw new Error(`The rut ${rut} already exists in the database.`);
+    }
+};
+
+module.exports = { existsRut, notExistsRut };

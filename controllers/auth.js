@@ -14,15 +14,15 @@ const loginAdmin = async (req = request, res = response) => {
         );
         if (!validPassword) {
             return res
-                .status(400)
-                .json({ msg: 'La contraseña no es correcta.' });
+                .status(401)
+                .json({ errors: 'The password is not correct.' });
         }
 
         const token = await generarJWT(admin.rut);
-        res.json({ admin, token });
+        res.status(201).json({ token });
     } catch (error) {
         console.log(error);
-        res.status(500).json('Ups');
+        res.status(500).json({ errors: 'ups' });
     }
 };
 
